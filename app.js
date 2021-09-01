@@ -4,7 +4,8 @@ const mysql = require('mysql');
 const cors = require('cors');
 const myConnection = require('express-myconnection');
 
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/authRoute');
+const budgetRoutes = require('./routes/budgetRoute');
 
 const { PORT, HOST, USER_, PASSWORD, DATABASE } = process.env;
 
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/budgets', budgetRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on ${PORT}`);
