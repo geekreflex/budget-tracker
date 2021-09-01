@@ -5,7 +5,7 @@ const cors = require('cors');
 const myConnection = require('express-myconnection');
 
 const authRoutes = require('./routes/authRoute');
-const budgetRoutes = require('./routes/budgetRoute');
+const budgetRoutes = require('./routes/budgetsRoute');
 
 const { PORT, HOST, USER_, PASSWORD, DATABASE } = process.env;
 
