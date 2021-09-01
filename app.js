@@ -4,6 +4,8 @@ const mysql = require('mysql');
 const cors = require('cors');
 const myConnection = require('express-myconnection');
 
+const authRoutes = require('./routes/authRoutes');
+
 const { PORT, HOST, USER_, PASSWORD, DATABASE } = process.env;
 
 const app = express();
@@ -26,6 +28,13 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
+
+app.get('/', (req, res) => {
+  res.send({ message: 'Hello There!' });
+});
+
+app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on ${PORT}`);
