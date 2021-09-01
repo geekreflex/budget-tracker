@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const generateToken = require('../utils/generateToken');
 const authController = {};
 
 authController.register = async (req, res) => {
@@ -39,6 +40,7 @@ authController.register = async (req, res) => {
                 } else {
                   res.status(201).send({
                     message: 'User registered successfully',
+                    token: generateToken(results.insertId),
                   });
                 }
               }
@@ -73,6 +75,7 @@ authController.login = async (req, res) => {
           if (comparison) {
             res.status(200).send({
               message: 'Login successfull',
+              token: generateToken(results[0].id),
             });
           } else {
             res.status(400).send({
