@@ -6,6 +6,7 @@ const myConnection = require('express-myconnection');
 
 const authRoutes = require('./routes/authRoute');
 const budgetRoutes = require('./routes/budgetsRoute');
+const expensesRoutes = require('./routes/expensesRoute');
 
 const { PORT, HOST, USER_, PASSWORD, DATABASE } = process.env;
 
@@ -37,6 +38,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/budgets', budgetRoutes);
+app.use('/api/expenses', expensesRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on ${PORT}`);
