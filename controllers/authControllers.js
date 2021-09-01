@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const generateToken = require('../utils/generateToken');
+
 const authController = {};
 
 authController.register = async (req, res) => {
