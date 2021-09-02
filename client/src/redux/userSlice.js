@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+
 import { token } from '../helper/token';
+import { BASE_URL } from '../helper/baseUrl';
 
 const initialState = {
   user: {},
@@ -9,8 +11,6 @@ const initialState = {
   error: null,
   isAuth: false,
 };
-
-const BASE_URL = 'http://localhost:4000';
 
 export const registerUserAsync = createAsyncThunk(
   'user/registerUserAsync',

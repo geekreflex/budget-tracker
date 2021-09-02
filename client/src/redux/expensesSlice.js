@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 import { token } from '../helper/token';
-
-const BASE_URL = 'http://localhost:4000';
+import { BASE_URL } from '../helper/baseUrl';
 
 const initialState = {
   data: [

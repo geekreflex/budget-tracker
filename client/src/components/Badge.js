@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { token } from '../helper/token';
+import { BASE_URL } from '../helper/baseUrl';
 
 const Badge = ({ budget }) => {
   const [expenses, setExpenses] = useState([]);
@@ -9,7 +10,7 @@ const Badge = ({ budget }) => {
 
   useEffect(() => {
     let isMounted = true;
-    fetch(`http://localhost:4000/expenses/${id}`, {
+    fetch(`${BASE_URL}/expenses/${id}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -34,11 +35,11 @@ const Badge = ({ budget }) => {
   return (
     <div className="badget-list mb-3">
       {isLoading ? (
-        <div>Loading</div>
+        <div style={{ fontSize: '10px', fontWeight: '600' }}>Loading...</div>
       ) : (
         <div>
           <div className="badge badge-info mr-3">
-            <span>Spent so far:</span>${totalExpenses.toLocaleString()}
+            <span>Spent so far: </span>${totalExpenses.toLocaleString()}
           </div>
 
           <div className="badge badge-info">

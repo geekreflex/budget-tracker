@@ -12,7 +12,7 @@ budgetController.create = async (req, res) => {
   let budget = {
     name: name,
     total: total,
-    userId: req.userId.userId,
+    userId: req.user.userId,
   };
 
   req.getConnection((error, conn) => {

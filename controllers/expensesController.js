@@ -16,25 +16,33 @@ expensesController.create = async (req, res) => {
     userId: req.user.id,
   };
 
-  req.getConnection((err, conn) => {
-    conn.query('INSERT INTO expenses set ?', expense, (err, results, field) => {
-      if (err) {
-        return res.status(400).send({ message: 'Error occured', err });
-      }
-      conn.query(
-        'SELECT * FROM expenses WHERE id = ?',
-        [results.insertId],
-        (err, results, field) => {
-          if (err) {
-            return res.status(400).send({ message: 'Error occured', err });
-          }
-          res.status(201).send({
-            message: 'Expense created successfully',
-            data: results[0],
-          });
+  req.getConnection((error, conn) => {
+    conn.query(
+      'INSERT INTO expenses set ?',
+      expense,
+      (error, results, field) => {
+        if (error) {
+          return res
+            .status(400)
+            .send({ message: error.message || 'Error occured' });
         }
-      );
-    });
+        conn.query(
+          'SELECT * FROM expenses WHERE id = ?',
+          [results.insertId],
+          (error, results, field) => {
+            if (error) {
+              return res
+                .status(400)
+                .send({ message: error.message || 'Error occured' });
+            }
+            res.status(201).send({
+              message: 'Expense created successfully',
+              data: results[0],
+            });
+          }
+        );
+      }
+    );
   });
 };
 
@@ -46,7 +54,7 @@ expensesController.getAll = async (req, res) => {
       'SELECT * FROM expenses WHERE budgetId = ?',
       [id],
       (error, results, field) => {
-        if (eerror) {
+        if (error) {
           return res.status(400).send({
             message: error.message || 'Error occured',
           });
