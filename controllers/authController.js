@@ -93,4 +93,26 @@ authController.login = async (req, res) => {
   });
 };
 
+authController.getUser = async (req, res) => {
+  req.getConnection((err, conn) => {
+    conn.query(
+      'SELECT * FROM users WHERE id = ?',
+      [req.user.id],
+      (err, results, field) => {
+        if (err) {
+          return res.status(500).send({ message: 'something went wrong' });
+        }
+
+        res.status(200).send({
+          user: {
+            id: results[0].id,
+            name: results[0].name,
+            email: results[0].email,
+          },
+        });
+      }
+    );
+  });
+};
+
 module.exports = authController;

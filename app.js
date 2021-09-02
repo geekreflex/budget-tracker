@@ -12,8 +12,6 @@ const { PORT, HOST, USER_, PASSWORD, DATABASE } = process.env;
 
 const app = express();
 
-const PORT = PORT || 4000;
-
 app.use(
   myConnection(
     mysql,
